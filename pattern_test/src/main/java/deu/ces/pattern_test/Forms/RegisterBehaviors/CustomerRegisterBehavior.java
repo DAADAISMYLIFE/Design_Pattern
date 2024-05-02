@@ -69,15 +69,13 @@ public class CustomerRegisterBehavior implements RegisterBehavior {
                 String passwordCheck = new String(passCheckField.getPassword());
                 String name = nameField.getText();
                 String address = addressField.getText();
-                
-                System.out.println(name);
 
                 // 회원가입 폼 검증
                 if (id.isBlank() || password.isBlank() || passwordCheck.isBlank() || name.isBlank() || address.isBlank()) {
                     JOptionPane.showMessageDialog(null, "모든 항목을 입력해주세요.");
                 } else if (checkRegisterContext(id, password, passwordCheck)) {
                     User newUser = new Customer(id, password, name, address);
-                    UserSystem.users.add(newUser);
+                    UserSystem.getInstance().registerUser(newUser);
                     JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.");
                     registerFrame.dispose();
                 }
@@ -103,7 +101,7 @@ public class CustomerRegisterBehavior implements RegisterBehavior {
             return false;
         }
 
-        for (User u : UserSystem.users) {
+        for (User u : UserSystem.getInstance().getUsers()) {
             if (u.getId().equals(id)) {
                 JOptionPane.showMessageDialog(null, "동일한 ID가 존재합니다.");
                 return false;

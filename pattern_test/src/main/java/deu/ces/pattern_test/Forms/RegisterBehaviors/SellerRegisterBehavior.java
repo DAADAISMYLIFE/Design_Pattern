@@ -71,13 +71,12 @@ public class SellerRegisterBehavior implements RegisterBehavior {
                 String name = nameField.getText();
                 String brandName = brandField.getText();
 
-
                 // 회원가입 폼 검증
                 if (id.isBlank() || password.isBlank() || passwordCheck.isBlank() || name.isBlank() || brandName.isBlank()) {
                     JOptionPane.showMessageDialog(null, "모든 항목을 입력해주세요.");
                 } else if (checkRegisterContext(id, password, passwordCheck)) {
                     User newUser = new Seller(id, password, name, brandName);
-                    UserSystem.users.add(newUser);
+                    UserSystem.getInstance().registerUser(newUser);
                     JOptionPane.showMessageDialog(null, "판매자 등록이 완료되었습니다.");
                     registerFrame.dispose();
                 }
@@ -103,7 +102,7 @@ public class SellerRegisterBehavior implements RegisterBehavior {
             JOptionPane.showMessageDialog(null, "비밀번호가 다릅니다.");
             return false;
         }
-        for (User u : UserSystem.users) {
+        for (User u : UserSystem.getInstance().getUsers()) {
             if (u.getId().equals(id)) {
                 JOptionPane.showMessageDialog(null, "동일한 ID가 존재합니다.");
                 return false;

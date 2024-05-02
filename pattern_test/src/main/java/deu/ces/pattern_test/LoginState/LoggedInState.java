@@ -20,7 +20,7 @@ public class LoggedInState implements LoginState {
     public void login(UserContext context) {
         System.out.println("이미 로그인 상태");
         Form form;
-        if (UserSystem.LogedInUser instanceof Customer) {
+        if (UserSystem.getInstance().getLogedInUser() instanceof Customer) {
             form = new CustomerForm();
         } else {
             form = new SellerForm();

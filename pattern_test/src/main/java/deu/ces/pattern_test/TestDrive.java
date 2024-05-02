@@ -18,7 +18,8 @@ import java.io.InputStreamReader;
 public class TestDrive {
 
     public static void main(String[] args) throws IOException {   
-        UserSystem us = new UserSystem();
+        UserSystem us = UserSystem.getInstance();
+        us.initUser();
         UserContext user = UserContext.getInstance();
         user.login();
     }

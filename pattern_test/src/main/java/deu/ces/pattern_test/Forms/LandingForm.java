@@ -54,10 +54,10 @@ public class LandingForm {
                 if (id.isBlank() || password.isBlank()) {
                     JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 입력해주세요.");
                 } else {
-                    UserSystem.login(id, password);
-                    if (UserSystem.LogedInUser == null) {
+                    UserSystem.getInstance().login(id, password);
+                    if (UserSystem.getInstance().getLogedInUser() == null) {
                         JOptionPane.showMessageDialog(null, "회원정보를 찾을 수 없습니다.");
-                    } else if (UserSystem.LogedInUser != null) {
+                    } else if (UserSystem.getInstance().getLogedInUser() != null) {
                         frmR.dispose();
                         UserContext.getInstance().login();
                     }
