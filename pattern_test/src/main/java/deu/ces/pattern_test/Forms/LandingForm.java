@@ -5,7 +5,6 @@
 package deu.ces.pattern_test.Forms;
 
 import deu.ces.pattern_test.LoginState.UserContext;
-import deu.ces.pattern_test.Users.Customer;
 import deu.ces.pattern_test.Users.UserSystem;
 import java.awt.Container;
 import java.awt.event.*;
@@ -59,6 +58,7 @@ public class LandingForm {
                     if (UserSystem.LogedInUser == null) {
                         JOptionPane.showMessageDialog(null, "회원정보를 찾을 수 없습니다.");
                     } else if (UserSystem.LogedInUser != null) {
+                        frmR.dispose();
                         UserContext.getInstance().login();
                     }
 

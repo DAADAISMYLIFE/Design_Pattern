@@ -4,8 +4,6 @@
  */
 package deu.ces.pattern_test.LoginState;
 
-import deu.ces.pattern_test.Forms.LandingForm;
-
 /**
  *
  * @author gka

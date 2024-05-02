@@ -15,25 +15,17 @@ public class SellerMainBehavior implements MainBehavior{
     @Override
     public void showMainForm() {
         JFrame registerFrame = new JFrame("판매자 메인");
-        registerFrame.setSize(250, 350);
+        registerFrame.setSize(250, 250);
         registerFrame.setLayout(null);
 
-        JLabel idLabel = new JLabel("아이디 :");
-        JTextField idField = new JTextField();
+        JButton productButton = new JButton("제품 관리");
+        JButton salesButton = new JButton("판매 기록");
+        
+        productButton.setBounds(40, 30, 160, 60);
+        salesButton.setBounds(40, 120, 160, 60);
 
-        JButton submitButton = new JButton("확인");
-        JButton cancelButton = new JButton("취소");
-
-        idLabel.setBounds(20, 20, 100, 30);
-        idField.setBounds(110, 20, 100, 30);
-        submitButton.setBounds(20, 270, 80, 30);
-        cancelButton.setBounds(130, 270, 80, 30);
-
-        registerFrame.add(idLabel);
-        registerFrame.add(idField);
-
-        registerFrame.add(submitButton);
-        registerFrame.add(cancelButton);
+        registerFrame.add(productButton);
+        registerFrame.add(salesButton);
 
         registerFrame.setLocationRelativeTo(null);
         registerFrame.setVisible(true);

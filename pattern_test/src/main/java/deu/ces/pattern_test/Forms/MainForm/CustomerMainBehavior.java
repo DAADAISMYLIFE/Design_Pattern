@@ -10,7 +10,7 @@ import javax.swing.*;
  *
  * @author gka
  */
-public class CustomerMainBehavior implements MainBehavior{
+public class CustomerMainBehavior implements MainBehavior {
 
     @Override
     public void showMainForm() {
@@ -18,22 +18,17 @@ public class CustomerMainBehavior implements MainBehavior{
         registerFrame.setSize(250, 350);
         registerFrame.setLayout(null);
 
-        JLabel idLabel = new JLabel("아이디 :");
-        JTextField idField = new JTextField();
+        JButton cartButton = new JButton("장바구니");
+        JButton purchaseButton = new JButton("구매내역");
+        JButton shoppingButton = new JButton("쇼핑하기");
 
-        JButton submitButton = new JButton("확인");
-        JButton cancelButton = new JButton("취소");
+        cartButton.setBounds(40, 30, 160, 60);
+        purchaseButton.setBounds(40, 120, 160, 60);
+        shoppingButton.setBounds(40, 210, 160, 60);
 
-        idLabel.setBounds(20, 20, 100, 30);
-        idField.setBounds(110, 20, 100, 30);
-        submitButton.setBounds(20, 270, 80, 30);
-        cancelButton.setBounds(130, 270, 80, 30);
-
-        registerFrame.add(idLabel);
-        registerFrame.add(idField);
-
-        registerFrame.add(submitButton);
-        registerFrame.add(cancelButton);
+        registerFrame.add(cartButton);
+        registerFrame.add(purchaseButton);
+        registerFrame.add(shoppingButton);
 
         registerFrame.setLocationRelativeTo(null);
         registerFrame.setVisible(true);

@@ -4,12 +4,7 @@
  */
 package deu.ces.pattern_test.LoginState;
 
-import deu.ces.pattern_test.Forms.CustomerForm;
-import deu.ces.pattern_test.Forms.Form;
 import deu.ces.pattern_test.Forms.LandingForm;
-import deu.ces.pattern_test.Forms.SellerForm;
-import deu.ces.pattern_test.Users.Customer;
-import deu.ces.pattern_test.Users.UserSystem;
 
 /**
  *
