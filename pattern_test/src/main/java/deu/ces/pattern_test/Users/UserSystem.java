@@ -4,6 +4,8 @@
  */
 package deu.ces.pattern_test.Users;
 
+import deu.ces.pattern_test.FileManager.FileManager;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -14,8 +16,8 @@ public class UserSystem {
 
     private static UserSystem instance;
 
-    public ArrayList<User> users = new ArrayList<>();
-    public User LogedInUser = null;
+    private ArrayList<User> users = new ArrayList<>();
+    private User LogedInUser = null;
 
     // 외부에서 인스턴스를 생성하지 못하도록 private 생성자를 사용
     private UserSystem() {
@@ -28,9 +30,11 @@ public class UserSystem {
         }
         return instance;
     }
-    
-     public void registerUser(User user) {
+
+    public void registerUser(User user) throws IOException {
         users.add(user);
+        FileManager.getInstance().writeDBFile("user.txt");
+        
     }
 
     public void login(String id, String password) {
@@ -48,8 +52,6 @@ public class UserSystem {
     public User getLogedInUser() {
         return LogedInUser;
     }
-    
-    
 
     // 이 메서드 삭제 예정
     public void initUser() {
@@ -59,7 +61,5 @@ public class UserSystem {
         users.add(newCustomer);
         users.add(newSeller);
     }
-
-   
 
 }

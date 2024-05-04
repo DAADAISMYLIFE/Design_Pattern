@@ -4,12 +4,9 @@
  */
 package deu.ces.pattern_test;
 
-import deu.ces.pattern_test.Forms.LandingForm;
+import deu.ces.pattern_test.FileManager.FileManager;
 import deu.ces.pattern_test.LoginState.UserContext;
-import deu.ces.pattern_test.Users.UserSystem;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 /**
  *
@@ -17,9 +14,12 @@ import java.io.InputStreamReader;
  */
 public class TestDrive {
 
-    public static void main(String[] args) throws IOException {   
-        UserSystem us = UserSystem.getInstance();
-        us.initUser();
+    public static void main(String[] args) throws IOException {
+
+        FileManager fm = FileManager.getInstance();
+        fm.createDBFile("user.txt");
+        fm.createDB("user.txt");
+
         UserContext user = UserContext.getInstance();
         user.login();
     }

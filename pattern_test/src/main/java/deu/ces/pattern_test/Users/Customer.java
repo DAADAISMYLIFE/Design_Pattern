@@ -16,5 +16,9 @@ public class Customer extends User {
         super(id, password, name);
         this.address = address;
     }
+    
+    public String getAddress(){
+        return address;
+    }
 
 }

@@ -21,7 +21,7 @@ public class LandingForm {
     public void showInterface() {
         JFrame frmR = new JFrame();
         frmR.setTitle("스마트 배송 서비스");
-        frmR.setSize(280, 180);
+        frmR.setSize(300, 200);
         Container swingContext = frmR.getContentPane();
         swingContext.setLayout(null);
 
@@ -32,12 +32,12 @@ public class LandingForm {
         JButton loginBtn = new JButton("로그인");
         JButton registerBtn = new JButton("회원가입");
 
-        idLabel.setBounds(30, 30, 100, 30);
-        idField.setBounds(120, 30, 100, 30);
-        passLabel.setBounds(30, 60, 100, 30);
-        passField.setBounds(120, 60, 100, 30);
-        loginBtn.setBounds(30, 100, 80, 30);
-        registerBtn.setBounds(120, 100, 100, 30);
+        idLabel.setBounds(40, 30, 100, 30);
+        idField.setBounds(160, 30, 100, 30);
+        passLabel.setBounds(40, 60, 100, 30);
+        passField.setBounds(160, 60, 100, 30);
+        loginBtn.setBounds(40, 120, 80, 30);
+        registerBtn.setBounds(160, 120, 100, 30);
 
         swingContext.add(idLabel);
         swingContext.add(passLabel);

@@ -6,6 +6,9 @@ package deu.ces.pattern_test.Forms.RegisterBehaviors;
 
 import deu.ces.pattern_test.Users.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -76,7 +79,11 @@ public class SellerRegisterBehavior implements RegisterBehavior {
                     JOptionPane.showMessageDialog(null, "모든 항목을 입력해주세요.");
                 } else if (checkRegisterContext(id, password, passwordCheck)) {
                     User newUser = new Seller(id, password, name, brandName);
-                    UserSystem.getInstance().registerUser(newUser);
+                    try {
+                        UserSystem.getInstance().registerUser(newUser);
+                    } catch (IOException ex) {
+                        Logger.getLogger(SellerRegisterBehavior.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     JOptionPane.showMessageDialog(null, "판매자 등록이 완료되었습니다.");
                     registerFrame.dispose();
                 }

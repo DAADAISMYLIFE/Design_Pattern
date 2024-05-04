@@ -1,0 +1,2 @@
+customer;test;123;test;address
+seller;qwer;123;qwer;brandname

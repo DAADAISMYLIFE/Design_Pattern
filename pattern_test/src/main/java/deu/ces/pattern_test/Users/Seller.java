@@ -17,4 +17,8 @@ public class Seller extends User {
         this.brandName = brandName;
     }
 
+    public String getBrandName() {
+        return brandName;
+    }
+
 }
