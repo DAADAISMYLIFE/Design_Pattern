@@ -1,15 +1,12 @@
-package cse.mavenproject1.Login;
+package cse.airplane_management_system.LoginSystem;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
  * @author 박상현
  */
-
-//UserDB의 User객체를 탐색하는 클래스
 public class UserDBIterator implements Iterator<User>{
-        private UserDB userDB; //검색을 수행할 userDB
+     private UserDB userDB; //검색을 수행할 userDB
         private int userIndex = 0;
         
         //생성자
@@ -29,4 +26,5 @@ public class UserDBIterator implements Iterator<User>{
             userIndex++;
             return targetUser;
     }       
+    
 }

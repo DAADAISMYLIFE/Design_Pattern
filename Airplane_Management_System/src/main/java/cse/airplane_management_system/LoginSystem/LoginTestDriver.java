@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
-package cse.mavenproject1.Login;
+package cse.airplane_management_system.LoginSystem;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,22 +6,21 @@ import java.io.InputStreamReader;
 import java.util.Iterator;
 
 /**
- *
  * @author 박상현
  */
-public class IteratorTestDrive {
+public class LoginTestDriver {
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         // TODO code application logic here
-        UserDB DB = new UserDB();
+         UserDB DB = new UserDB();
         boolean isUserExist = false;
         //객체 생성
-        User A = new User("A", "B", "Name", 0, "Man" ,"Address", true);
-        User B = new User("1", "2", "Name", 0, "Man" ,"Address", true);
-        User C = new User("?", "!", "Name", 0, "Man" ,"Address", true);
+        User A = new User("A", "B", "Name", 0, "Man" ,"Address");
+        User B = new User("1", "2", "Name", 0, "Man" ,"Address");
+        User C = new User("?", "!", "Name", 0, "Man" ,"Address");
         //객체 추가
         DB.AddUser(A);
         DB.AddUser(B);
@@ -52,6 +47,7 @@ public class IteratorTestDrive {
         //유저 유무 확인
         if(isUserExist){
             System.out.println("유저 있음");
+            
         }
         else{
             System.out.println("유저 없음");
