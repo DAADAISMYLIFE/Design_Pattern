@@ -15,5 +15,30 @@ public class PCCafeMember {
         this.user_name = user_name;
         this.user_age = user_age;
     }
+
+    public String get_ID() {
+        return user_ID;
+    }
+
+    public String get_password() {
+        return user_password;
+    }
+
+    public String get_name() {
+        return user_name;
+    }
+
+    public int get_age() {
+        return user_age;
+    }
+
+    public int get_Remaining_time() {
+        return remaining_time;
+    }
+
+    public boolean get_Is_using_PC() {
+        return is_using_PC;
+    }
   
+    
 }

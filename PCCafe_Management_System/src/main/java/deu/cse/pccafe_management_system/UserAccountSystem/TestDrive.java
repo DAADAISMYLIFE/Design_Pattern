@@ -14,6 +14,7 @@ public class TestDrive { //손님 시스템
             System.out.println("==================");
             System.out.println("1. 관리자");
             System.out.println("2. 손님");
+            System.out.println("==================");
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String input = reader.readLine();
             int choice = Integer.parseInt(input);
