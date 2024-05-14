@@ -4,15 +4,13 @@
  */
 package deu.ces.pattern_test.FileManager;
 
+import deu.ces.pattern_test.Product.Product;
+import deu.ces.pattern_test.Product.ProductSystem;
 import deu.ces.pattern_test.Users.Customer;
 import deu.ces.pattern_test.Users.Seller;
 import deu.ces.pattern_test.Users.User;
 import deu.ces.pattern_test.Users.UserSystem;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -28,6 +26,11 @@ public class FileManager {
     private FileManager() {
     }
 
+    public static String getBasePath() {
+        return basePath;
+    }
+    
+    
     // 인스턴스에 접근할 수 있는 public static 메서드
     public static FileManager getInstance() {
         File baseFolder = new File(basePath);
@@ -62,8 +65,12 @@ public class FileManager {
                 } else {
                     newUser = new Seller(params[1], params[2], params[3], params[4]);
                 }
-                System.out.println("생성됨");
                 UserSystem.getInstance().registerUser(newUser);
+            } else if (fileName.equals("product.txt")) {
+                Product newProduct;
+                String[] params = fileContent.split(";");
+                newProduct = new Product(params[0], Double.parseDouble(params[1]), params[2], params[3]);
+                ProductSystem.getInstance().registerProduct(newProduct);
             }
         }
     }
@@ -102,6 +109,13 @@ public class FileManager {
                 }
 
                 String context = userType + ';' + u.getId() + ';' + u.getPassword() + ';' + u.getName() + ';' + info + '\n';
+                write.write(context);
+            }
+            write.flush();
+            write.close();
+        } else if (fileName.equals("product.txt")) {
+            for (Product product : ProductSystem.getInstance().getProducts()) {
+                String context = product.getName() + ';' + product.getPrice() + ';' + product.getDescription() + ';' + product.getImagePath() + '\n';
                 write.write(context);
             }
             write.flush();

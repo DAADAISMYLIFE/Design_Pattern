@@ -31,6 +31,7 @@ public class LoggedInState implements LoginState {
     @Override
     public void logout(UserContext context) {
         System.out.println("로그아웃 되었습니다.");
+        UserSystem.getInstance().logout();
         context.setState(new LoggedOutState());
     }
 

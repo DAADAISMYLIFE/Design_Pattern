@@ -44,6 +44,10 @@ public class UserSystem {
             }
         }
     }
+    
+    public void logout() {
+        LogedInUser = null;
+    }
 
     public ArrayList<User> getUsers() {
         return users;
@@ -52,14 +56,4 @@ public class UserSystem {
     public User getLogedInUser() {
         return LogedInUser;
     }
-
-    // 이 메서드 삭제 예정
-    public void initUser() {
-        User newCustomer = new Customer("test", "123", "test", "address");
-        User newSeller = new Seller("qwer", "123", "qwer", "brandname");
-
-        users.add(newCustomer);
-        users.add(newSeller);
-    }
-
 }

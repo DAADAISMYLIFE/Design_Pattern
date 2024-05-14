@@ -4,7 +4,9 @@
  */
 package deu.ces.pattern_test.Forms.RegisterBehaviors;
 
-import deu.ces.pattern_test.Users.*;
+import deu.ces.pattern_test.Users.UserSystem;
+import deu.ces.pattern_test.Users.Customer;
+import deu.ces.pattern_test.Users.User;
 import java.awt.event.*;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -98,6 +100,7 @@ public class CustomerRegisterBehavior implements RegisterBehavior {
 
         registerFrame.setLocationRelativeTo(null);
         registerFrame.setVisible(true);
+        registerFrame.setResizable(false);
         registerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 

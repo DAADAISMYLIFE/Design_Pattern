@@ -74,7 +74,7 @@ public class LandingForm {
                 questionFrame.setSize(250, 150);
                 questionFrame.setLayout(null);
 
-                JLabel questionLabel = new JLabel("사용자 유형을 선택해주세요?");
+                JLabel questionLabel = new JLabel("사용자 유형을 선택해주세요.");
                 JButton customerButton = new JButton("구매자");
                 JButton sellerButton = new JButton("판매자");
 
@@ -106,6 +106,7 @@ public class LandingForm {
 
                 questionFrame.setLocationRelativeTo(null);
                 questionFrame.setVisible(true);
+                questionFrame.setResizable(false);
             }
         });
 

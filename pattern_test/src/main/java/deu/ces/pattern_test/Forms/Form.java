@@ -11,6 +11,8 @@ import deu.ces.pattern_test.Forms.RegisterBehaviors.RegisterBehavior;
  *
  * @author gka
  */
+
+// 전략패턴 사용
 public abstract class Form {
 
     protected RegisterBehavior registerBehavior;

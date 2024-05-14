@@ -13,8 +13,6 @@ import deu.ces.pattern_test.Forms.RegisterBehaviors.CustomerRegisterBehavior;
  */
 public class CustomerForm extends Form {
 
-    private String address;
-    
     public CustomerForm() {
         this.registerBehavior = new CustomerRegisterBehavior();
         this.mainBehavior = new CustomerMainBehavior();

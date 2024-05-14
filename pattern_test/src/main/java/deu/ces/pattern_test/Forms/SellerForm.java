@@ -13,8 +13,6 @@ import deu.ces.pattern_test.Forms.RegisterBehaviors.SellerRegisterBehavior;
  */
 public class SellerForm extends Form {
 
-    private String brandName;
-
     public SellerForm() {
         this.registerBehavior = new SellerRegisterBehavior();
         this.mainBehavior = new SellerMainBehavior();

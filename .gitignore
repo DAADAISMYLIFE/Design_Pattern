@@ -32,3 +32,4 @@ dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
+/pattern_test/target/
