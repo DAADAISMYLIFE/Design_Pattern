@@ -2,15 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package cseProject.Login.UserCreation;
-
-import java.io.IOException;
+package cseProject.LoginState;
 
 /**
  *
  * @author 이승환
  */
-public interface UserCreation_Behavior {
-
-    void make_User() throws IOException;
+public interface LoginState {
+    
 }
