@@ -1,5 +1,6 @@
-package cseProject;
+package cseProject.Helper;
 
+import cseProject.Login.User_Manager;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,23 +22,23 @@ import java.util.logging.Logger;
  *
  * @author 이승환
  */
-public class SystemHelper {
+public class RealSystemHelper implements InterfaceSystemHelper {
 
-    private static SystemHelper instance;
+    private static RealSystemHelper instance;
 
     // 외부에서 인스턴스화 방지하기 위해 private 생성자 선언
-    private SystemHelper() {
+    private RealSystemHelper() {
     }
 
     // 인스턴스를 반환하는 정적 메서드
-    public static SystemHelper getInstance() {
+    public static RealSystemHelper getInstance() {
         if (instance == null) {
-            instance = new SystemHelper();
+            instance = new RealSystemHelper();
         }
         return instance;
     }
 
-    public static String getUserInput() {       //유저의 입력을 받는 메서드
+    public String getUserInput() {       //유저의 입력을 받는 메서드
         String inputLine = null;
         try {
             InputStreamReader reader = new InputStreamReader(System.in, "EUC-KR");
@@ -55,7 +56,7 @@ public class SystemHelper {
         return inputLine;
     }
 
-    public static ArrayList<String[]> getTextedData(String parameter) {    // 파일에 저장된 데이터를 리스트에 읽어드림
+    public ArrayList<String[]> getTextedData(String parameter) {    //파일에 저장된 데이터를 리스트에 읽어드림
 
         ArrayList<String[]> list = new ArrayList<>();
 
@@ -101,7 +102,7 @@ public class SystemHelper {
         }
     }
 
-    public static void BackUpTextFile(String paramater) {   // 기존 파일을 파일이름_old폴더에 현재시간을 이름으로 백업하고 기존파일은 삭제
+    public void BackUpTextFile(String paramater) {   //기존 파일을 파일이름_old폴더에 현재시간을 이름으로 백업하고 기존파일은 삭제
 
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
@@ -125,10 +126,24 @@ public class SystemHelper {
         try {
             Files.copy(file.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException ex) {
-            Logger.getLogger(SystemHelper.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RealSystemHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         file.delete();
+    }
+
+    @Override
+    public void fileMake(String str) {
+        try {
+            File f = new File("./" + str + ".txt");
+            if (f.exists()) {
+                System.out.println("파일이 이미 존재합니다.");
+            } else if (f.createNewFile()) {
+                System.out.println("파일을 생성합니다.");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(User_Manager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

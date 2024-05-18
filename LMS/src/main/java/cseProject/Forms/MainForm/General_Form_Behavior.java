@@ -4,7 +4,8 @@
  */
 package cseProject.Forms.MainForm;
 
-import cseProject.SystemHelper;
+import cseProject.Login.User_Manager;
+import cseProject.Helper.ProxyHelper;
 
 /**
  *
@@ -12,7 +13,7 @@ import cseProject.SystemHelper;
  */
 public class General_Form_Behavior implements Main_Form_Behavior {
 
-    private static final SystemHelper helper = SystemHelper.getInstance();
+     private static final ProxyHelper helper = ProxyHelper.getInstance();
 
     @Override
     public void show_MainForm() {
@@ -20,6 +21,7 @@ public class General_Form_Behavior implements Main_Form_Behavior {
         System.out.println("│ 1. 도서 검색/대출/반납                         │");
         System.out.println("│ 2. 희망도서 신청                               │");
         System.out.println("│ 3. 내 정보 조회                                │");
+        System.out.println("│ 4. 로그아웃                                    │");
         System.out.println("└────────────────────────┘");
         String choice = helper.getUserInput();
         switch (choice) {
@@ -35,7 +37,10 @@ public class General_Form_Behavior implements Main_Form_Behavior {
                 System.out.println("내 정보 탭");
                 show_MyInformation();
             }
-
+            case "4" -> {
+                System.out.println("로그아웃을 실행합니다");
+                User_Manager.getInstance().userLogout();
+            }
             default -> {
                 System.out.println("잘못된 입력입니다.");
             }

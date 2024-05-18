@@ -2,15 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package cseProject.LoginState;
+package cseUsermanagementFunction.ModifyFunction;
 
 /**
  *
- * @author 이승환
+ * @author jasuj
  */
-public interface LoginState {
+public interface ModifyStrategy {
 
-    public void login(UserContext context);
-
-    public void logout(UserContext context);
+    public void excute();
 }

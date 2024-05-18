@@ -4,7 +4,7 @@
  */
 package cseProject.Login;
 
-import cseProject.SystemHelper;
+import cseProject.Helper.RealSystemHelper;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,7 +24,7 @@ public class User_Manager {
     private static User_Manager instance; // 싱글턴
     private ArrayList<User_Info> userDB = new ArrayList<>(); // 유저DB
     private User_Info loginUser; // 현재 로그인 유저
-    private static SystemHelper helper = SystemHelper.getInstance();
+    private static RealSystemHelper helper = RealSystemHelper.getInstance();
 
     private User_Manager() {
         // Private 생성자, 처음 생성될시 UserData.txt에서 유저정보를 가져와 객체 리스트화 하여 추가해줌
@@ -35,7 +35,8 @@ public class User_Manager {
                     UserTemp.get(i)[0],
                     UserTemp.get(i)[1],
                     UserTemp.get(i)[2],
-                    Boolean.parseBoolean(UserTemp.get(i)[3])
+                    Boolean.parseBoolean(UserTemp.get(i)[3]),
+                    UserTemp.get(i)[4]
             ));
         }
     }
@@ -47,10 +48,10 @@ public class User_Manager {
         return instance;
     }
 
-    // user_MemberShip : 전략패턴 실행 ->  정보 받음 -> 전략패턴에서 addUser 실행 -> 생성한 객체를 add_userDB에 넘겨줌, 여기 매개변수 이름이 user_MemberShip
+    // user_MemberShip : 로그인시스템에서 정보 받음 -> 전략패턴 실행 -> 전략패턴에서 addUser 실행 -> 생성한 객체를 add_userDB에 넘겨줌, 여기 매개변수 이름이 user_MemberShip
     public void add_userDB(User_Info user_MemberShip) {
-        //User_Info newUser = User_Factory.createUser(user_MemberShip); //팩토리 메서드를 통해 사용자 객체 생성
-        userDB.add(user_MemberShip);
+        User_Info newUser = User_Factory.createUser(user_MemberShip); //팩토리 메서드를 통해 사용자 객체 생성
+        userDB.add(newUser);
         Regenerate("UserData"); //userDB에 새롭게 추가된 유저정보를 기반으로 데이터 파일 재생성(UserData.txt)
     }
 
@@ -68,6 +69,11 @@ public class User_Manager {
 
     public ArrayList<User_Info> getUserDB() {
         return userDB;
+    }
+
+    public void userLogout() {
+        loginUser = null;
+
     }
 
     public void Regenerate(String str) { //변경된 파일을 백업 후 재성성
@@ -94,6 +100,8 @@ public class User_Manager {
                         + userDB.get(i).getUserName()
                         + ","
                         + String.valueOf(userDB.get(i).getIsManager())
+                        + ","
+                        + userDB.get(i).getRegisteredDate()
                         + "/" // '/'문자로 사용자와 다른 사용자의 정보를 구분지음
                 );
                 out.append("\n");
