@@ -4,9 +4,11 @@
  */
 package deu.ces.pattern_test;
 
+import deu.ces.pattern_test.FileManager.Command.FileCreateCommand;
+import deu.ces.pattern_test.FileManager.Command.FileRemoteControl;
 import deu.ces.pattern_test.FileManager.FileManager;
+import deu.ces.pattern_test.FileManager.RemoteLoader;
 import deu.ces.pattern_test.LoginState.UserContext;
-
 import java.io.IOException;
 
 /**
@@ -16,11 +18,13 @@ import java.io.IOException;
 public class TestDrive {
 
     public static void main(String[] args) throws IOException {
-        FileManager fm = FileManager.getInstance();
-        fm.createDBFile("user.txt");
-        fm.createDB("user.txt");
-        fm.createDBFile("product.txt");
-        fm.createDB("product.txt");
+
+        //커맨드 패턴 적용
+        RemoteLoader.getInstance().setRemoteControl();
+        RemoteLoader.getInstance().getRemoteControl().buttonWasPressed(0, "user.txt");
+        RemoteLoader.getInstance().getRemoteControl().buttonWasPressed(0, "product.txt");
+        RemoteLoader.getInstance().getRemoteControl().buttonWasPressed(0, "shopping_cart.txt");
+        RemoteLoader.getInstance().getRemoteControl().buttonWasPressed(0, "shopping_history.txt");
 
         UserContext user = UserContext.getInstance();
         user.login();

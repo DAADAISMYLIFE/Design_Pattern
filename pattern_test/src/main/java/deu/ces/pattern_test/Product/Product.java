@@ -8,8 +8,8 @@ package deu.ces.pattern_test.Product;
  *
  * @author 홍서영
  */
-
 public class Product {
+
     private String name;
     private double price;
     private String description;
@@ -31,7 +31,7 @@ public class Product {
     public double getPrice() {
         return price;
     }
-    
+
     public String getBrand() {
         return brand;
     }
@@ -43,9 +43,9 @@ public class Product {
     public String getImagePath() {
         return imagePath;
     }
-    
-     public void setBrand(String brand) {
+
+    public void setBrand(String brand) {
         this.brand = brand;
     }
-     
+
 }

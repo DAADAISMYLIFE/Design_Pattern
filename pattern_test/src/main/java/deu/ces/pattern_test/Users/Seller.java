@@ -21,4 +21,10 @@ public class Seller extends User {
         return brandName;
     }
 
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+    
+    
+
 }

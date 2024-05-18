@@ -4,7 +4,7 @@
  */
 package deu.ces.pattern_test.Product;
 
-import deu.ces.pattern_test.FileManager.FileManager;
+import deu.ces.pattern_test.FileManager.RemoteLoader;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -27,10 +27,11 @@ public class ProductSystem {
 
     public void registerProduct(Product product) throws IOException {
         products.add(product);
-        FileManager.getInstance().writeDBFile("product.txt");
+        RemoteLoader.getInstance().getRemoteControl().buttonWasPressed(2, "product.txt");
+
     }
 
     public ArrayList<Product> getProducts() {
         return products;
-    } 
+    }
 }

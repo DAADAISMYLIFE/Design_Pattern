@@ -10,4 +10,5 @@ package deu.ces.pattern_test.Forms.MainForm;
  */
 public interface MainBehavior {
     public void showMainForm();
+    public void showChangeInfoForm();
 }

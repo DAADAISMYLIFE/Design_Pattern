@@ -4,7 +4,7 @@
  */
 package deu.ces.pattern_test.Users;
 
-import deu.ces.pattern_test.FileManager.FileManager;
+import deu.ces.pattern_test.FileManager.RemoteLoader;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -33,8 +33,8 @@ public class UserSystem {
 
     public void registerUser(User user) throws IOException {
         users.add(user);
-        FileManager.getInstance().writeDBFile("user.txt");
-        
+        RemoteLoader.getInstance().getRemoteControl().buttonWasPressed(2, "user.txt");
+
     }
 
     public void login(String id, String password) {
@@ -44,7 +44,7 @@ public class UserSystem {
             }
         }
     }
-    
+
     public void logout() {
         LogedInUser = null;
     }
@@ -53,7 +53,17 @@ public class UserSystem {
         return users;
     }
 
+    public User getUser(String id) {
+        for (User u : users) {
+            if (u.getId().equals(id)) {
+                return u;
+            }
+        }
+        return null;
+    }
+
     public User getLogedInUser() {
         return LogedInUser;
     }
+
 }
