@@ -1,6 +1,7 @@
 package cse.airplane_management_system;
 
 import cse.airplane_management_system.LoginSystem.User;
+import cse.airplane_management_system.ReservationSystem.Reservation;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -12,9 +13,10 @@ import java.util.ArrayList;
  * @author 박상현
  */
 public class FileManager {
-     //파일 생성 메소드
+    //파일 생성 메소드
+
     public void createDBFile(int typeOfDB, String path) throws IOException {
-        String File_Path = System.getProperty("user.dir")+ "\\src\\main\\java\\cse\\airplane_management_system\\" + path + "\\"; //파일 경로
+        String File_Path = System.getProperty("user.dir") + "\\src\\main\\java\\cse\\airplane_management_system\\" + path + "\\"; //파일 경로
         String File_Name;
 
         switch (typeOfDB) {
@@ -46,6 +48,7 @@ public class FileManager {
             Create_File.createNewFile();
         }
     }
+
     //파일 읽어서 StringAttay로 전달하는 메소드
     public ArrayList<String> readDBFile(int typeOfDB) throws IOException {
         String File_Path;
@@ -57,13 +60,17 @@ public class FileManager {
             case 0:
                 File_Path = System.getProperty("user.dir") + "\\src\\main\\java\\cse\\airplane_management_system\\LoginSystem\\User.txt";
                 break;
-
             //항공기 시스템
-                
+            case 1:
+                File_Path = System.getProperty("user.dir") + "\\src\\main\\java\\cse\\airplane_management_system\\AirPlaneSystem\\Airplane.txt";
+                break;
             //예약 시스템
-                
-           //보고서 시스템
+            case 2:
+                File_Path = System.getProperty("user.dir") + "\\src\\main\\java\\cse\\airplane_management_system\\ReservationSystem\\Reservation.txt";
+                break;
+            //보고서 시스템
             default:
+                System.out.println("파일 읽기 타임 잘못됨");
                 return null;
         }
         //파일 내용 읽기
@@ -77,6 +84,7 @@ public class FileManager {
         //String  배열 넘겨줌
         return readContext;
     }
+
     //객체를 받아 객체의 정보를 파일에 저장하는 메서드
     public void writeDBFile(int typeOfDB, Object DBList) throws IOException {
         String File_Path;
@@ -87,11 +95,11 @@ public class FileManager {
             case 0:
                 File_Path = System.getProperty("user.dir") + "\\src\\main\\java\\cse\\airplane_management_system\\LoginSystem\\User.txt";
                 write = new FileWriter(File_Path, false);
-                ArrayList<User> foodWriter = (ArrayList<User>) DBList;
-                for (User temp : foodWriter) {
+                ArrayList<User> userWriter = (ArrayList<User>) DBList;
+                for (User temp : userWriter) {
                     //객체 정보 직렬화
-                    writeLine.add(temp.getUserID() + ";" + temp.getUserPassword() + ";"  + temp.getUserName()+ ";"  + 
-                                           temp.getUserAge()+ ";"  + temp.getUserGender() +  ";" + temp.getUserAddress()+ "\n");
+                    writeLine.add(temp.getUserID() + ";" + temp.getUserPassword() + ";" + temp.getUserName() + ";"
+                            + temp.getUserAge() + ";" + temp.getUserGender() + ";" + temp.getUserAddress() + "\n");
                 }
                 //파일에 저장
                 for (String writeContext : writeLine) {
@@ -100,12 +108,28 @@ public class FileManager {
                 write.flush();
                 write.close();
                 break;
-             //항공기 시스템
+            //항공기 시스템
             case 1:
                 break;
-             //예약 시스템
-             
-             //보고서 시스템
+            //예약 시스템
+            case 2:
+               File_Path = System.getProperty("user.dir") + "\\src\\main\\java\\cse\\airplane_management_system\\ReservationSystem\\Reservation.txt";
+                write = new FileWriter(File_Path, false);
+                ArrayList<Reservation> reservationWriter = (ArrayList<Reservation>) DBList;
+                for (Reservation temp : reservationWriter) {
+                    //객체 정보 직렬화
+                    writeLine.add(temp.GetBookedAirline() + ";" + temp.GetBookedUserID() + ";"+ temp.GetBookedUserName() + ";" + 
+                            temp.GetPhoneNumber() + ";" + temp.GetBookedSeatNum()+ "\n");
+                }
+                //파일에 저장
+                for (String writeContext : writeLine) {
+                    write.write(writeContext);
+                }
+                write.flush();
+                write.close();
+                break;
+
+            //보고서 시스템
         }
     }
 }
