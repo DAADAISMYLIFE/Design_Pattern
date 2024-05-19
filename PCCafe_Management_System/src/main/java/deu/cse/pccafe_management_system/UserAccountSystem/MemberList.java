@@ -4,11 +4,9 @@ import java.util.ArrayList;
 
 public class MemberList {
 
-    public ArrayList<PCCafeMember> list;
-    MemberFactory factory;
+    public ArrayList<Member> list;
 
     public MemberList() {
-        this.factory =  new MemberFactory(); // 회원팩토리 생성
         list = new ArrayList<>(); //회원 정보를 담는 리스트
         Init_Member(); // 임의의 회원 2개 추가해놓는 메소드
     }
