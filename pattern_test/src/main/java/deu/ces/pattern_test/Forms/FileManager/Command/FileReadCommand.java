@@ -1,23 +1,24 @@
-package deu.ces.pattern_test.FileManager.Command;
+package deu.ces.pattern_test.Forms.FileManager.Command;
 
 import deu.ces.pattern_test.FileManager.FileManager;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class FileWriteCommand implements FileCommand {
+public class FileReadCommand implements FileCommand {
 
     private FileManager fileManager;
 
-    public FileWriteCommand(FileManager fm) {
+    public FileReadCommand(FileManager fm) {
         this.fileManager = fm;
     }
 
+    @Override
     public void execute(String fileName) {
         try {
-            fileManager.writeDBFile(fileName);
+            fileManager.readDBFile(fileName);
         } catch (IOException ex) {
-            Logger.getLogger(FileWriteCommand.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FileReadCommand.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -1,4 +1,4 @@
-package deu.ces.pattern_test.FileManager.Command;
+package deu.ces.pattern_test.Forms.FileManager.Command;
 
 import deu.ces.pattern_test.FileManager.FileManager;
 import java.io.IOException;

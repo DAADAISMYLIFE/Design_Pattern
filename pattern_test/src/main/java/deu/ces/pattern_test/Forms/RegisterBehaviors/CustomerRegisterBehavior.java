@@ -117,7 +117,6 @@ public class CustomerRegisterBehavior implements RegisterBehavior {
                 return false;
             }
         }
-
         return password.equals(passwordCheck);
     }
 }

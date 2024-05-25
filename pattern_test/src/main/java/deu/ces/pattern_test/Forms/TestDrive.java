@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package deu.ces.pattern_test;
+package deu.ces.pattern_test.Forms;
 
 import deu.ces.pattern_test.FileManager.Command.FileRemoteControl;
 import deu.ces.pattern_test.FileManager.RemoteLoader;
