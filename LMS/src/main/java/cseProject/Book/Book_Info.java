@@ -4,11 +4,14 @@
  */
 package cseProject.Book;
 
+import cseProject.Rental.Observer;
+import java.util.ArrayList;
+
 /**
  *
  * @author 이승환
  */
-public class Book_Info {
+public class Book_Info extends Subject {
 
     private String title;
     private String author;
@@ -16,14 +19,38 @@ public class Book_Info {
     private String genre;
     private String ISBN;
     private boolean isBorrorwed;
+
     // 무조건 생성 순서는 타 - 아 - 장 - 퍼 - i
-    public Book_Info(String title, String author, String genre, String publisher, String ISBN) {
+    public Book_Info(String title, String author, String genre, String publisher, String ISBN, boolean isBorrowed) {
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.genre = genre;
         this.ISBN = ISBN;
-        this.isBorrorwed = false;
+        this.isBorrorwed = isBorrowed;
+        observers = new ArrayList<>();
+    }
+
+    @Override
+    public void registerObserver(Observer o) {
+        observers.add(o);
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+        int i = observers.indexOf(o);
+        if (i >= 0) {
+            observers.remove(o);
+        }
+    }
+
+    @Override
+    public void notifyObserver() {
+        System.out.println("변 " + ISBN);
+
+        observers.forEach((observer) -> {
+            observer.update(this.title);
+        });
     }
 
     public String getTitle() {
@@ -32,6 +59,7 @@ public class Book_Info {
 
     public void setTitle(String title) {
         this.title = title;
+        notifyObserver();
     }
 
     public String getAuthor() {
@@ -42,7 +70,7 @@ public class Book_Info {
         this.author = author;
     }
 
-    public String getPublihser() {
+    public String getPublisher() {
         return publisher;
     }
 
@@ -66,7 +94,7 @@ public class Book_Info {
         this.ISBN = ISBN;
     }
 
-    public boolean isIsBorrorwed() {
+    public boolean getIsBorrorwed() {
         return isBorrorwed;
     }
 
