@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public class MemberIterator implements Iterator {
 
-    ArrayList<PCCafeMember> members;
+    ArrayList<Member> members;
     int position = 0;
 
-    public MemberIterator(ArrayList<PCCafeMember> members) {
+    public MemberIterator(ArrayList<Member> members) {
         this.members = members;
     }
 
-    public PCCafeMember Next() {
-        PCCafeMember member = members.get(position);
+    public Member Next() {
+        Member member = members.get(position);
         position += 1;
         return member;
     }

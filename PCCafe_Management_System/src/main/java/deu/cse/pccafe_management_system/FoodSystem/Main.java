@@ -1,9 +1,11 @@
 package deu.cse.pccafe_management_system.FoodSystem;
 
+import deu.cse.pccafe_management_system.FoodSystem.util.FoodMenu;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
 
         boolean isAdminMode = isAdminMode(scanner);
@@ -14,7 +16,7 @@ public class Main {
             adminModeManager.adminMode(scanner);
         } else {
             CustomerModeManager customerModeManager = new CustomerModeManager();
-            customerModeManager.customerMode(scanner);
+            //customerModeManager.customerMode(scanner);
         }
 
         scanner.close();

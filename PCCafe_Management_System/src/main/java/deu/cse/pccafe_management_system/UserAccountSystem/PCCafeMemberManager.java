@@ -1,20 +1,23 @@
-
 package deu.cse.pccafe_management_system.UserAccountSystem;
+
+import deu.cse.pccafe_management_system.IntegratedSystem.IntegratedSys;
+import java.io.IOException;
 import java.util.ArrayList;
 
+// 회원 정보를 ArrayList 에 담아 관리하는 클래스
+// 싱글턴으로 시스템 구현
 public class PCCafeMemberManager {
 
-    public ArrayList<PCCafeMember> memberList;
     public static PCCafeMemberManager instance;
-    MemberFactory factory;
-
+    public PCCafeMemberList member_list; //
+    private IntegratedSys is =new IntegratedSys();
     PCCafeMemberManager() {
-        memberList = new ArrayList<>();
-        Init_Member();
-        this.factory =  new MemberFactory();
+        this.member_list = new PCCafeMemberList();
+
     }
 
-    public static synchronized PCCafeMemberManager getInstance() {
+    // 싱글턴 PCCafeMemberManager 인스턴스를 리턴해주는 메소드
+    public static synchronized PCCafeMemberManager GetInstance() {
         if (instance == null) {
             instance = new PCCafeMemberManager();
         }
@@ -22,21 +25,36 @@ public class PCCafeMemberManager {
     }
 
     // 회원 추가
-    public void Add_Member(String user_ID, String user_password, String user_name, int user_age) {
-        PCCafeMember newMember = factory.Create_member(user_ID, user_password, user_name, user_age);
-        memberList.add(newMember);
-        System.out.println("회원 추가 완료.");
+    public void Add_Member(PCCafeMember member) throws IOException {
+        member_list.list.add(member);
     }
 
-    // 회원 삭제
-    public void Remove_Member(PCCafeMember member) {
-
+    public PCCafeMember Check_Member(String input_ID, String input_password) {
+        Iterator member_Iterator = member_list.CreateIterator();
+        while (member_Iterator.hasNext()) {
+            PCCafeMember member = (PCCafeMember) member_Iterator.Next();
+            if (member.getMember_ID().equals(input_ID) && member.get_password().equals(input_password)) {
+                return member;
+            }
+        }
+        return null;
     }
 
-    public void Init_Member() {
-        PCCafeMember member1 = new PCCafeMember("user1", "password1", "John", 25);
-        PCCafeMember member2 = new PCCafeMember("user2", "password2", "Alice", 30);
-        memberList.add(member1);
-        memberList.add(member2);
+    public void Print_all_members() throws IOException {
+        Iterator member_Iterator = member_list.CreateIterator();
+        System.out.println("========= 회원 리스트 =========");
+        Print_Members(member_Iterator);
+        System.out.println("==========================");
+        is.Admin_Menu();
+    }
+
+    private void Print_Members(Iterator iterator) {
+        while (iterator.hasNext()) {
+            PCCafeMember member = (PCCafeMember) (iterator.Next());
+            System.out.println("----------------------------------------------");
+            System.out.println("아이디: " + member.getMember_ID() + " | 비번: " + member.get_password());
+            System.out.println("이름: " + member.getMember_name() + " | 나이: " + member.get_age());
+            System.out.println("----------------------------------------------");
+        }
     }
 }

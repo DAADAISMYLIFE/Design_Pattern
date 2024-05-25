@@ -1,20 +1,25 @@
-
 package deu.cse.pccafe_management_system.UserAccountSystem;
 
+import deu.cse.pccafe_management_system.Forms.Form;
+import deu.cse.pccafe_management_system.Forms.GuestForm;
+import deu.cse.pccafe_management_system.IntegratedSystem.IntegratedSys;
+import deu.cse.pccafe_management_system.SeatSystem.Main_SeatSystem;
+import deu.cse.pccafe_management_system.SeatSystem.Seat;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+// 로그인/회원가입을 담당하는 클래스
+// 회원가입시 멤버매니저에게 요청하여 회원리스트에 추가
 public class UserAccountSys { //로그인/회원가입 시스템
 
-    public boolean isRunning = true;
-    public static UserAccountSys instance;
-    PCCafeMemberManager member_manager = PCCafeMemberManager.getInstance();
-
-    public UserAccountSys() {
+    public boolean isRunning = true; // 로그인/회원가입 시스템이 실행중인 상태 | 로그인 성공시 false로 됨
+    public static UserAccountSys instance; //싱글턴
+    public IntegratedSys start_sys = new IntegratedSys();
+    private UserAccountSys() {
     }
 
-    public static synchronized UserAccountSys getInstance() {
+    public static synchronized UserAccountSys GetInstance() {
         if (instance == null) {
             instance = new UserAccountSys();
         }
@@ -23,31 +28,31 @@ public class UserAccountSys { //로그인/회원가입 시스템
 
     public void Run_UserAccountSys() throws IOException {
         System.out.println("로그인 / 회원가입 시스템 시작.");
-        while (isRunning) {
-            System.out.println("1. 로그인");
-            System.out.println("2. 회원가입");
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            Form form = new GuestForm();
+            form.perform_Main();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); //사용자 입력
             String input = reader.readLine();
             int choice = Integer.parseInt(input);
 
-            switch (choice) {
+            switch (choice) { // 1 입력시 로그인 기능 실행, 2 입력시 회원가입 기능 실행
                 case 1:
                     Login();
                     break;
                 case 2:
-                    Create_account();
+                    form.perform_Creation();
+                    Run_UserAccountSys();
                     break;
                 case 3:
-                    Print_all_members();
+                    start_sys.Run_Start();
                     break;
             }
         }
-    }
+    //로그인 기능
 
     private void Login() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String input = reader.readLine();
+        BufferedReader reader;
 
         System.out.print("아이디: ");
         reader = new BufferedReader(new InputStreamReader(System.in));
@@ -56,41 +61,24 @@ public class UserAccountSys { //로그인/회원가입 시스템
         reader = new BufferedReader(new InputStreamReader(System.in));
         String input_password = reader.readLine();
 
-        for (PCCafeMember member : member_manager.memberList) {
-            if (member.user_ID.equals(input_ID) && member.user_password.equals(input_password)) {
-                System.out.println("<로그인 성공>");
-                isRunning =false;
+        if (PCCafeMemberManager.GetInstance().Check_Member(input_ID, input_password)!=null) {
+            System.out.println("<로그인 성공>");
+            Main_SeatSystem.GetInstance().Print_Seat();
+            System.out.print("사용할 좌석을 선택해 주세요: ");
+            reader = new BufferedReader(new InputStreamReader(System.in));//입력
+            String input = reader.readLine();
+            Seat seat =Main_SeatSystem.GetInstance().Set_Ues(input, true);
+            if (seat!=null) {
+                System.out.println(" 좌석에 로그인 성공");
+                isRunning = false;
+                IntegratedSys is = new IntegratedSys();
+                is.Guest_Menu(seat);
+            }
+            else{
+                System.out.println("사용중인 좌석입니다.");
+                Run_UserAccountSys();
             }
         }
     }
 
-    private void Create_account() throws IOException {
-        System.out.println("===== 회원 정보를 입력 =====");
-        System.out.print("사용할 아이디: ");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String input_ID = reader.readLine();
-        System.out.print("사용할 비밀번호: ");
-        reader = new BufferedReader(new InputStreamReader(System.in));
-        String input_password = reader.readLine();
-        System.out.print("이름: ");
-        reader = new BufferedReader(new InputStreamReader(System.in));
-        String input_name = reader.readLine();
-        System.out.print("나이: ");
-        reader = new BufferedReader(new InputStreamReader(System.in));
-        String str = reader.readLine();
-        int input_age = Integer.parseInt(str);
-        member_manager.Add_Member(input_ID, input_password, input_name, input_age);
-
-        Print_all_members();
-    }
-
-    public void Print_all_members() {
-        System.out.println("===== 회원 리스트 =====");
-        for (PCCafeMember member : member_manager.memberList) {
-            System.out.println("아이디: " + member.user_ID);
-            System.out.println("이름: " + member.user_name);
-            System.out.println("나이: " + member.user_age);
-            System.out.println("======================");
-        }
-    }
 }
