@@ -93,16 +93,16 @@ public class General_Form_Behavior implements Main_Form_Behavior {
 
             case "4" -> {
                 System.out.println("도서 반납");
-                Book_Info targetBook;
-                while (true) {
-                    targetBook = Book_Manager.getInstance().findBookByISBN();
-                    if (targetBook != null) { // 널포인트 해결 코드
-                        // 반납 옵저버 실행 (책 객체 상태 변경 알림) <- 반납 메서드만 주셈
-                        break;
-                    } else {
-                        System.out.println("- 해당 도서를 찾을 수 없습니다.");
-                    }
-                }
+                //Book_Info targetBook;
+//                while (true) {
+//                    targetBook = Book_Manager.getInstance().findBookByISBN();
+//                    if (targetBook != null) { // 널포인트 해결 코드
+//                        // 반납 옵저버 실행 (책 객체 상태 변경 알림) <- 반납 메서드만 주셈
+//                        break;
+//                    } else {
+//                        System.out.println("- 해당 도서를 찾을 수 없습니다.");
+//                    }
+//                }
                 Rental_Info targetRentalBook;
                 targetRentalBook = Rental_Manager.getInstance().findMyBookByISBN();
                 Rental_Manager.getInstance().doReturn(targetRentalBook);
@@ -132,6 +132,7 @@ public class General_Form_Behavior implements Main_Form_Behavior {
     }
 
     public void showMyInformation() {
-
+        Rental_Manager.getInstance().showMyRentalInfo();
+        show_MainForm();
     }
 }

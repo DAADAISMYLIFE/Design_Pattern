@@ -5,6 +5,7 @@
 package cseProject.Rental;
 
 import cseProject.Book.Book_Info;
+import cseProject.Book.Book_Manager;
 import cseProject.FileManagerTemplate.FileManagerTemplate;
 import cseProject.Helper.RealSystemHelper;
 import cseProject.Login.User_Manager;
@@ -56,23 +57,28 @@ public class Rental_Manager {
         String userName = User_Manager.getInstance().getLoginUser().getUserName();
         String title = targetBook.getTitle();
         String ISBN = targetBook.getISBN();
+        targetBook.setIsBorrorwed(true);
 
         Rental_Info rtbook = new Rental_Info(userID, userName, title, ISBN);
 
         add_rentalDB(rtbook);
         System.out.println("- " + targetBook.getTitle() + " 도서가 대여되었습니다.");
         try {
+            FileManagerTemplate.getInstance("Book").writeDBFile("Book_Info.txt");
             FileManagerTemplate.getInstance("Rental").writeDBFile("Rental_Info.txt");
         } catch (IOException ex) {
             Logger.getLogger(Rental_Manager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void doReturn(Rental_Info targetBook) { // 도서 대여
+    public void doReturn(Rental_Info targetBook) { // 도서 반납
         System.out.println("반납을 실행 합니다");
         remove_rentalDB(targetBook);
+        Book_Info targetBooka = Book_Manager.getInstance().findBookByISBN(targetBook.getISBN());
+        targetBooka.setIsBorrorwed(false);
         System.out.println("- " + targetBook.getTitle() + " 도서가 반납되었습니다.");
         try {
+            FileManagerTemplate.getInstance("Book").writeDBFile("Book_Info.txt");
             FileManagerTemplate.getInstance("Rental").writeDBFile("Rental_Info.txt");
         } catch (IOException ex) {
             Logger.getLogger(Rental_Manager.class.getName()).log(Level.SEVERE, null, ex);
@@ -88,5 +94,18 @@ public class Rental_Manager {
             }
         }
         return null;
+    }
+
+    public void showMyRentalInfo() {
+        System.out.println("▶ " + User_Manager.getInstance().getLoginUser().getUserName() + " 님의 대여 정보 입니다");
+        System.out.println("────────────────────────────────────────────────────────────────────────");
+        String myID = User_Manager.getInstance().getLoginUser().getUserID();
+        for (Rental_Info rental : rentalDB) {
+            if (rental.getUserID().equals(myID)) {
+                //System.out.println(rental.getTitle() + " " + rental.getISBN());
+                System.out.println(String.format("%s%20s", rental.getTitle(), rental.getISBN()));
+            }
+        }
+        System.out.println("────────────────────────────────────────────────────────────────────────");
     }
 }
